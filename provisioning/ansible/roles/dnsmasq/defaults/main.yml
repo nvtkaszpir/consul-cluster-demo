@@ -1,0 +1,3 @@
+---
+# list of dns servers to use as upstream
+dnsmasq_upstream_servers: "{{ dns_list | default(['8.8.8.8','8.8.4.4']) }}"

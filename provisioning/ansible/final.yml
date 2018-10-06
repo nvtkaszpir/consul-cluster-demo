@@ -1,0 +1,11 @@
+---
+- name: 'Show final message'
+  become: true
+  gather_facts: true
+  hosts: all
+  tasks:
+    - name: "Show final message with dumb default port and interface"
+      run_once: true
+      debug:
+        msg:
+          - "See cluster gui under http://{{ hostvars['centos-1']['consul_addresses' ]['http'] }}:8500"

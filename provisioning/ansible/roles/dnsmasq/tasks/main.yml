@@ -1,0 +1,38 @@
+---
+
+- name: Install dnsmasq
+  become: true
+  package:
+    name: dnsmasq
+    state: latest
+
+- name: Manage dnsmasq
+  become: true
+  service:
+    name: dnsmasq
+    enabled: true
+
+- name: Use template for dnsmasq.conf
+  become: true
+  template:
+    src: etc/dnsmasq.conf.j2
+    dest: /etc/dnsmasq.conf
+
+- name: Add dnsmasq redirection for consul domains
+  become: true
+  template:
+    src: etc/dnsmasq.d/10-consul.j2
+    dest: /etc/dnsmasq.d/10-consul
+
+- name: Ugly hack nuke resolv.conf
+  become: true
+  copy:
+    content: |
+      nameserver 127.0.0.1
+    dest: /etc/resolv.conf
+
+- name: Restart dnsmasq
+  become: true
+  service:
+    name: dnsmasq
+    state: 'restarted'

@@ -1,0 +1,32 @@
+# {{ ansible_managed }}
+
+# Never forward plain names (without a dot or domain part)
+domain-needed
+
+# use those upstream dns servers
+{% for server in ( dnsmasq_upstream_servers | difference(['127.0.0.1'])) %}
+server={{ server }}
+{% endfor %}
+
+interface=lo
+bind-interfaces
+
+cache-size=1500
+
+no-negcache
+
+# do not edit below this line.
+
+# For debugging purposes, log each DNS query as it passes through
+# dnsmasq.
+#log-queries
+
+# Include another lot of configuration options.
+#conf-file=/etc/dnsmasq.more.conf
+#conf-dir=/etc/dnsmasq.d
+
+# Include all the files in a directory except those ending in .bak
+#conf-dir=/etc/dnsmasq.d,.bak
+
+# Include all files in a directory which end in .conf
+#conf-dir=/etc/dnsmasq.d/,*.conf

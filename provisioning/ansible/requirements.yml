@@ -1,0 +1,6 @@
+---
+# Install a role from the Ansible Galaxy
+- src: geerlingguy.docker
+  version: 2.5.0
+- src: brianshumate.consul
+  version: v2.0.9

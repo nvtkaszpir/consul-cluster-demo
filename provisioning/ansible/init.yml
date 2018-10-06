@@ -1,0 +1,12 @@
+---
+- name: 'Install basic consul services'
+  become: true
+  gather_facts: true
+  hosts: all
+  roles:
+    - packages
+    - dnsmasq
+    - geerlingguy.docker
+    - brianshumate.consul
+
+- import_playbook: 'final.yml'
