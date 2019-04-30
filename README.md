@@ -24,9 +24,13 @@ Example run under Ubuntu 16.04 as host:
 ```bash
 
 sudo apt-get install -y python-virtualenv
-virtualenv .venv
-source .venv/bin/activate
+
+curl https://pyenv.run | bash
+pyenv install
+pyenv virtualenv --python=python3 ccd
+pyenv activate ccd
 pip install -r provisioning/ansible/requirements.txt
+
 vagrant up --no-provision
 vagrant provision --provision-with=shell
 
