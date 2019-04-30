@@ -1,6 +1,7 @@
 ---
-consul_version: '1.0.7'
+consul_version: '1.0.8' # 1.0.8 required due to 'enable_local_script_checks'
 consul_install_remotely: true
+consul_install_upgrade: true
 consul_addresses:
   dns: "{{ ansible_default_ipv4.address }}"
   http: "{{ ansible_default_ipv4.address }}"

@@ -3,4 +3,4 @@
 - src: geerlingguy.docker
   version: 2.5.0
 - src: brianshumate.consul
-  version: v2.0.9
+  version: v2.3.6

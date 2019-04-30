@@ -22,20 +22,28 @@ steps in sequence.
 Example run under Ubuntu 16.04 as host:
 
 ```bash
-
+# install system core packages on controlling host
 sudo apt-get install -y python-virtualenv
 
+# install dependencies on controlling host (pyenv/python pip packages)
 curl https://pyenv.run | bash
+
 pyenv install
 pyenv virtualenv --python=python3 ccd
 pyenv activate ccd
-pip install -r provisioning/ansible/requirements.txt
 
+# optional - get ansible dependencies
+# ansible-galaxy install --force -r provisioning/ansible/.galaxy/ -r provisioning/ansible/requirements.yml
+
+# spawn vms
 vagrant up --no-provision
 vagrant provision --provision-with=shell
 
-ansible-galaxy install --force -r provisioning/ansible/.galaxy/ -r provisioning/ansible/requirements.yml
+# get ansible dependencies and generate inventory
+vagrant provision --provision-with=ansible
 
+# provision
 ansible-playbook -vvv -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory provisioning/ansible/init.yml
+
 
 ```
